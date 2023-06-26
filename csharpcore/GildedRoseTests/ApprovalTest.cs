@@ -5,25 +5,24 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using GildedRoseTests;
 using NUnit.Framework;
+using Xunit;
 
 namespace csharp
 {
-    [UseReporter(typeof(DiffReporter))]
-    [TestFixture]
-    public class ApprovalTest
-    {
-        [Test]
-        public void ThirtyDays()
-        {
-            
-            StringBuilder fakeoutput = new StringBuilder();
-            Console.SetOut(new StringWriter(fakeoutput));
-            Console.SetIn(new StringReader("a\n"));
+	public class ApprovalTest
+	{
+		[Fact]
+		[UseReporter(typeof(DiffReporter))]
+		public void ThirtyDays()
+		{
+			StringBuilder fakeoutput = new StringBuilder();
+			Console.SetOut(new StringWriter(fakeoutput));
+			Console.SetIn(new StringReader("a\n"));
 
-            TexttestFixture.Main(new string[] { });
-            var output = fakeoutput.ToString();
+			TexttestFixture.Main(new string[] { });
+			var output = fakeoutput.ToString();
 
-            Approvals.Verify(output);
-        }
-    }
+			Approvals.Verify(output);
+		}
+	}
 }
